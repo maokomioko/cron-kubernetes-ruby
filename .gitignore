@@ -1,4 +1,16 @@
-**/.bundle/
+# Ignore bundler config.
+/.bundle
+
+# Ignore all environment files (except templates).
+/.env*
+!/.env*.erb
+
+# Ignore editor config.
+/.idea
+/.vscode
+/.zed
+
+# Ignore all log files and temp files.
 /.yardoc
 /_yardoc/
 /coverage/
@@ -6,8 +18,10 @@
 /pkg/
 /spec/reports/
 /tmp/
+
+# Ignore all cache files.
 /Gemfile.lock
 **/*.gemfile.lock
 
-# rspec failure tracking
+# Ignore rspec status files.
 .rspec_status

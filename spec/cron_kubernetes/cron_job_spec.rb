@@ -88,6 +88,7 @@ RSpec.describe CronKubernetes::CronJob do
             cron-kubernetes-identifier: my-app
         spec:
           schedule: "*/1 * * * *"
+          concurrencyPolicy: Forbid
           jobTemplate:
             metadata:
             spec:

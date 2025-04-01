@@ -23,7 +23,7 @@ module CronKubernetes
       private
 
       def kubeconfig
-        File.join(ENV["HOME"], ".kube", "config")
+        File.join(Dir.home, ".kube", "config")
       end
 
       def auth_options(config)
@@ -34,7 +34,7 @@ module CronKubernetes
       end
 
       def google_application_default_credentials
-        return unless defined?(Google) && defined?(Google::Auth)
+        return unless defined?(Google::Auth)
 
         {bearer_token: Kubeclient::GoogleApplicationDefaultCredentials.token}
       end

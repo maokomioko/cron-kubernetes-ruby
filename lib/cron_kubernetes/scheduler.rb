@@ -13,21 +13,21 @@ module CronKubernetes
       @identifier = CronKubernetes.identifier
     end
 
-    def rake(task, schedule:, name: nil)
+    def rake(task, schedule:, name: nil, cron_job_settings: {})
       rake_command = "bundle exec rake #{task} --silent"
       rake_command = "RAILS_ENV=#{rails_env} #{rake_command}" if rails_env
-      @schedule << new_cron_job(schedule, rake_command, name)
+      @schedule << new_cron_job(schedule, rake_command, name, cron_job_settings)
     end
 
-    def runner(ruby_command, schedule:, name: nil)
+    def runner(ruby_command, schedule:, name: nil, cron_job_settings: {})
       env = nil
       env = "-e #{rails_env} " if rails_env
       runner_command = "bin/rails runner #{env}'#{ruby_command}'"
-      @schedule << new_cron_job(schedule, runner_command, name)
+      @schedule << new_cron_job(schedule, runner_command, name, cron_job_settings)
     end
 
-    def command(command, schedule:, name: nil)
-      @schedule << new_cron_job(schedule, command, name)
+    def command(command, schedule:, name: nil, cron_job_settings: {})
+      @schedule << new_cron_job(schedule, command, name, cron_job_settings)
     end
 
     private
@@ -42,18 +42,19 @@ module CronKubernetes
       end
     end
 
-    def new_cron_job(schedule, command, name)
+    def new_cron_job(schedule, command, name, cron_job_settings)
       CronJob.new(
         schedule:,
-        command:      make_command(command),
-        job_manifest: CronKubernetes.manifest,
+        command:           make_command(command),
+        job_manifest:      CronKubernetes.manifest,
+        cron_job_settings:,
         name:,
-        identifier:   @identifier
+        identifier:        @identifier
       )
     end
 
     def rails_env
-      ENV["RAILS_ENV"]
+      ENV.fetch("RAILS_ENV", nil)
     end
 
     def root

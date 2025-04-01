@@ -5,5 +5,5 @@ appraise "kubeclient-3" do
 end
 
 appraise "kubeclient-4" do
-  gem "kubeclient", "4.0.0"
+  gem "kubeclient", "4.12.0"
 end

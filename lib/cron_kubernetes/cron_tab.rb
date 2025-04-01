@@ -60,11 +60,11 @@ module CronKubernetes
     end
 
     def index_cron_jobs(jobs)
-      jobs.map { |job| ["#{job.identifier}-#{job.name}", job] }.to_h
+      jobs.to_h { |job| ["#{job.identifier}-#{job.name}", job] }
     end
 
     def index_kubernetes_cron_jobs(jobs)
-      jobs.map { |job| [job.metadata.name, job] }.to_h
+      jobs.to_h { |job| [job.metadata.name, job] }
     end
   end
 end

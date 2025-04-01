@@ -32,8 +32,8 @@ module CronKubernetes
   define_setting :kubeclient, nil
 
   class << self
-    def schedule(&block)
-      CronKubernetes::Scheduler.instance.instance_eval(&block)
+    def schedule(&)
+      CronKubernetes::Scheduler.instance.instance_eval(&)
     end
   end
 end

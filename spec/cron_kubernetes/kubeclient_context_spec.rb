@@ -3,6 +3,10 @@
 require "spec_helper"
 require "googleauth"
 
+# Define Struct classes to replace OpenStruct
+KubeConfigContext = Struct.new(:api_endpoint, :api_version, :namespace, :auth_options, :ssl_options)
+KubeConfig = Struct.new(:context)
+
 RSpec.describe CronKubernetes::KubeclientContext do
   let(:context) { CronKubernetes::KubeclientContext.context }
 
@@ -57,13 +61,13 @@ RSpec.describe CronKubernetes::KubeclientContext do
 
     context "without Google default credentials" do
       let(:config) do
-        OpenStruct.new(
-          context: OpenStruct.new(
-            api_endpoint: "https://127.0.0.1:8443",
-            api_version:  "v1",
-            namespace:    nil,
-            auth_options: {bearer_token: "token"},
-            ssl_options:  {ca_file: "/path/to/ca.crt"}
+        KubeConfig.new(
+          KubeConfigContext.new(
+            "https://127.0.0.1:8443",
+            "v1",
+            nil,
+            {bearer_token: "token"},
+            {ca_file: "/path/to/ca.crt"}
           )
         )
       end
@@ -81,13 +85,13 @@ RSpec.describe CronKubernetes::KubeclientContext do
 
     context "with Google default credentials" do
       let(:config) do
-        OpenStruct.new(
-          context: OpenStruct.new(
-            api_endpoint: "https://127.0.0.1:8443",
-            api_version:  "v1",
-            namespace:    nil,
-            auth_options: {},
-            ssl_options:  {}
+        KubeConfig.new(
+          KubeConfigContext.new(
+            "https://127.0.0.1:8443",
+            "v1",
+            nil,
+            {},
+            {}
           )
         )
       end

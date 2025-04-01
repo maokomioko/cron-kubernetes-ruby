@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.description   = "Configure and deploy Kubernetes CronJobs from ruby with a single schedule."
   spec.homepage      = "https://github.com/keylimetoolbox/cron-kubernetes"
   spec.license       = "MIT"
-  spec.required_ruby_version = ">= 3.2"
+  spec.required_ruby_version = "~> 3.4"
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
@@ -25,15 +25,5 @@ Gem::Specification.new do |spec|
   spec.executables << "cron_kubernetes"
 
   spec.add_dependency "kubeclient", ">= 3.1.2", "< 5.0"
-
-  spec.add_development_dependency "appraisal"
-  spec.add_development_dependency "bundler", "~> 2.4"
-  spec.add_development_dependency "bundler-audit", "~> 0"
-  spec.add_development_dependency "mocha", "~> 1.3"
-  spec.add_development_dependency "rake", "~> 13.1"
-  spec.add_development_dependency "rspec", "~> 3.12"
-  spec.add_development_dependency "rubocop", "~> 1.57"
-
-  # For connecting to a GKE cluster in development/test
-  spec.add_development_dependency "googleauth"
+  spec.metadata["rubygems_mfa_required"] = "true"
 end

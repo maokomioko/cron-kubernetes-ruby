@@ -62,7 +62,7 @@ RSpec.describe CronKubernetes::Scheduler do
 
     context "when RAILS_ENV is defined" do
       before do
-        @rails_env = ENV["RAILS_ENV"]
+        @rails_env = ENV.fetch("RAILS_ENV", nil)
         ENV["RAILS_ENV"] = "production"
       end
 
@@ -103,7 +103,7 @@ RSpec.describe CronKubernetes::Scheduler do
 
     context "when RAILS_ENV is defined" do
       before do
-        @rails_env = ENV["RAILS_ENV"]
+        @rails_env = ENV.fetch("RAILS_ENV", nil)
         ENV["RAILS_ENV"] = "production"
       end
 
