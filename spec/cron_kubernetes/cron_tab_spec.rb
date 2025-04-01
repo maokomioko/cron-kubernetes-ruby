@@ -19,20 +19,20 @@ RSpec.describe CronKubernetes::CronTab do
   let(:cron_job_manifest) do
     {
         apiVersion: "batch/v1",
-        kind:       "CronJob",
-        metadata:   {
-            name:      "spec-minutely",
+        kind: "CronJob",
+        metadata: {
+            name: "spec-minutely",
             namespace: "default",
-            labels:    {"cron-kubernetes-identifier": "spec"}
+            labels: {"cron-kubernetes-identifier": "spec"}
         },
-        spec:       {
-            schedule:    "*/1 * * * *",
+        spec: {
+            schedule: "*/1 * * * *",
             jobTemplate: {
                 metadata: nil,
-                spec:     {
+                spec: {
                     template: {
                         spec: {
-                            containers:    [{image: "ubuntu", command: "ls -l"}],
+                            containers: [{image: "ubuntu", command: "ls -l"}],
                             restartPolicy: "OnFailure"
                         }
                     }
@@ -43,11 +43,11 @@ RSpec.describe CronKubernetes::CronTab do
   end
   let(:job) do
     CronKubernetes::CronJob.new(
-      schedule:     "*/1 * * * *",
-      command:      "ls -l",
+      schedule: "*/1 * * * *",
+      command: "ls -l",
       job_manifest:,
-      name:         "minutely",
-      identifier:   "spec"
+      name: "minutely",
+      identifier: "spec"
     )
   end
   let(:cron_job) do

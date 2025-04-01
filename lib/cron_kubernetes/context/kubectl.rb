@@ -16,7 +16,7 @@ module CronKubernetes
           config.context.api_version,
           config.context.namespace,
           auth_options: auth_options(config),
-          ssl_options:  config.context.ssl_options
+          ssl_options: config.context.ssl_options
         )
       end
 

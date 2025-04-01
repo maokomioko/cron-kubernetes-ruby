@@ -27,9 +27,9 @@ module CronKubernetes
 
     private
 
-    def define_class_method(name, &block)
+    def define_class_method(name, &)
       (class << self; self; end).instance_eval do
-        define_method(name, &block)
+        define_method(name, &)
       end
     end
   end

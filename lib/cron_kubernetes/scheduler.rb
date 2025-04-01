@@ -44,12 +44,12 @@ module CronKubernetes
 
     def new_cron_job(schedule, command, name, cron_job_settings)
       CronJob.new(
+        command: make_command(command),
         schedule:,
-        command:           make_command(command),
-        job_manifest:      CronKubernetes.manifest,
+        job_manifest: CronKubernetes.manifest,
         cron_job_settings:,
         name:,
-        identifier:        @identifier
+        identifier: @identifier
       )
     end
 

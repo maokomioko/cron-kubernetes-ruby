@@ -24,11 +24,11 @@ RSpec.describe CronKubernetes::CronJob do
 
     it "accepts schedule, command, job_manifest, name parameters" do
       job = CronKubernetes::CronJob.new(
-        schedule:     "30 0 * * *",
-        command:      "/bin/bash -l -c ls\\ -l",
+        schedule: "30 0 * * *",
+        command: "/bin/bash -l -c ls\\ -l",
         job_manifest: manifest,
-        name:         "cron-job",
-        identifier:   "my-app"
+        name: "cron-job",
+        identifier: "my-app"
       )
       expect(job.schedule).to eq "30 0 * * *"
       expect(job.command).to eq "/bin/bash -l -c ls\\ -l"
@@ -68,11 +68,11 @@ RSpec.describe CronKubernetes::CronJob do
   context "#cron_job_manifest" do
     subject do
       CronKubernetes::CronJob.new(
-        schedule:     "*/1 * * * *",
-        command:      ["/bin/bash", "-l", "-c", "echo Hello from the Kubernetes cluster"],
+        schedule: "*/1 * * * *",
+        command: ["/bin/bash", "-l", "-c", "echo Hello from the Kubernetes cluster"],
         job_manifest: manifest,
-        name:         "hello",
-        identifier:   "my-app"
+        name: "hello",
+        identifier: "my-app"
       )
     end
 
@@ -109,10 +109,10 @@ RSpec.describe CronKubernetes::CronJob do
     context "when no name is provided" do
       subject do
         CronKubernetes::CronJob.new(
-          schedule:     "*/1 * * * *",
-          command:      ["/bin/bash", "-l", "-c", "echo Hello from the Kubernetes cluster"],
+          schedule: "*/1 * * * *",
+          command: ["/bin/bash", "-l", "-c", "echo Hello from the Kubernetes cluster"],
           job_manifest: manifest,
-          identifier:   "my-app"
+          identifier: "my-app"
         )
       end
 
